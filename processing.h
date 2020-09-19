@@ -80,6 +80,7 @@ void attachNewNodeLink(int val, node* newLink, vector<table> mainTable, bool rep
             while(temp -> nodeLink){
                 temp = temp -> nodeLink;
             }
+            temp -> nodeLink = newLink;
         }
         else{
             if(!temp -> nodeLink){
@@ -92,7 +93,6 @@ void attachNewNodeLink(int val, node* newLink, vector<table> mainTable, bool rep
                 temp -> nodeLink = newLink;
             }
         }
-        temp -> nodeLink = newLink;
     }
 }
 
