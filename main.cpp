@@ -21,9 +21,9 @@ int main(){
     // Iterate through the dataset.
     for(int i = 0; i < n; i++){
 
-        if(i == 380){
-            cout << "Break here";
-        }
+        //if(i == 380){
+        //    cout << "Break here";
+        //}
 
         // Add to the table and rearrange data[i]
         addCountTable(mainTable, data[i]);
@@ -31,7 +31,8 @@ int main(){
         rearrangeTree(mainTable, data[i], &root);
         // Insert into the tree
         insertTree(mainTable, data[i], &root);
-        cout << i << endl << flush;
+        if(i % 100 == 0)
+            cout << i << endl << flush;
     }
 
     /*for(int k = 0; k < mainTable.size(); k++){

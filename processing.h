@@ -213,6 +213,7 @@ void insertTree(vector<table> &mainTable, vector<int> &transaction, node *root){
 
             (x -> child).push_back(newNode);
             matched_child = newNode;
+
             // ONLY HAVE TO ADD LINK WHEN NEW NODE IS INSERTED.
             nodeLinkCache.push_back(make_pair(transaction[i], matched_child));
         }
