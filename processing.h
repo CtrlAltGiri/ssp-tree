@@ -62,6 +62,25 @@ void addCountTable(vector<table> &mainTable, vector<int> &transaction){
 }
 
 
+
+
+
+
+
+
+
+
+
+/*
+
+
+STEP 2: REARRANGE TREE
+
+
+
+*/
+
+
 void attachNewNodeLink(int val, node* newLink, vector<table> mainTable, bool replace = false){
 
     // First off, find the index
@@ -177,7 +196,7 @@ void rearrangeTree(vector<table> &mainTable, vector<int> &transaction, node *roo
 
                 exchange(x, y, z, i, j);
 
-                merge(x, j, mainTable);
+                merge(x, i, mainTable);
                 // come through this path again DFS.
                 // since z and y are swapped now, come again.
                 i--;
@@ -188,8 +207,29 @@ void rearrangeTree(vector<table> &mainTable, vector<int> &transaction, node *roo
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+STEP 3 : INSERTING NODES INTO THE TREE.
+
+
+*/
 void insertTree(vector<table> &mainTable, vector<int> &transaction, node *root){
-    node* x = root;
+    node *x = root;
     node *matched_child;
     vector<pair<int, node*>> nodeLinkCache;
 
