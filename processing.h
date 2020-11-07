@@ -7,6 +7,7 @@ struct node{
     int item_no;
     unsigned int count;
     vector<node*> child;
+    node* parent;
     node* nodeLink;
 };
 
@@ -81,7 +82,7 @@ STEP 2: REARRANGE TREE
 */
 
 
-void attachNewNodeLink(int val, node* newLink, vector<table> mainTable, bool replace = false){
+void attachNewNodeLink(int val, node* newLink, vector<table> mainTable, bool replace = false, node* oldLink = NULL){
 
     // First off, find the index
     int index = indexOfInTable(mainTable, val);
@@ -106,7 +107,8 @@ void attachNewNodeLink(int val, node* newLink, vector<table> mainTable, bool rep
                 mainTable[index].nodeLink = newLink;
             }
             else{
-                while(temp -> nodeLink -> nodeLink){
+                // Find the old Link and replace it with the new one.
+                while(temp -> nodeLink != oldLink){
                     temp = temp -> nodeLink;
                 }
                 temp -> nodeLink = newLink;
@@ -130,21 +132,43 @@ void exchange(node *x, node *y, node *z, int i, int j){
             if(k == j){
                 continue;
             }
+            // new parent update
+            (y -> child)[k] -> parent = newNode;
             (newNode -> child).push_back((y -> child)[k]);
         }
+        // idk if this is right. should it be outside?
+        (y -> child).clear();
+
+        // parent addition
+        newNode -> parent = x;
 
         // Make this newNode as another child of x (sibling of y)
         (x -> child).push_back(newNode);
     }
 
     // swap y and z
-    (y -> child).clear();
-    for(int k = 0; k < (z -> child).size(); k++){
+    vector<node*> tempChildren ((y -> child).begin(), (y -> child).end());
+    (y -> child).clear(); // this one is legit. its only the upper one that we have to check.
+
+    int k;
+    for(k = 0; k < (z -> child).size(); k++){
+        // new parent update
+        (z -> child)[k] -> parent = y;
         (y -> child).push_back((z -> child)[k]);
     }
-    y -> count = z -> count;
+
     (z -> child).clear();
-    (z -> child).push_back(y);
+    for(k = 0; k < tempChildren.size(); k++){
+        (z -> child).push_back(tempChildren[k]);
+        (z -> child)[k] -> parent = z;
+    }
+
+    y -> count = z -> count;
+    // do i have to do something to z -> count as well?
+
+    // parent addition
+    y -> parent = z;
+    z -> parent = x;
 
     (x -> child)[i] = z;
 }
@@ -159,13 +183,15 @@ void merge(node* x, int index, vector<table> &mainTable){
         if(match_sibling -> item_no == target_item && i != index){
             // if there is another z item, merge all their stuff together.
             for(int j = 0; j < (match_sibling -> child).size(); j++){
+                //parent update
+                (match_sibling -> child)[j] -> parent = target_node;
                 (target_node -> child).push_back((match_sibling -> child)[j]);
             }
             target_node -> count += match_sibling -> count;
             target_node -> nodeLink = match_sibling -> nodeLink;
 
             // also nodeLink from table to this match_sibling needs to be updated.
-            attachNewNodeLink(match_sibling -> item_no, target_node, mainTable, true);
+            attachNewNodeLink(match_sibling -> item_no, target_node, mainTable, true, match_sibling);
 
             (x -> child).erase((x -> child).begin() + i);
             delete match_sibling;
@@ -250,6 +276,7 @@ void insertTree(vector<table> &mainTable, vector<int> &transaction, node *root){
             newNode -> count = 1;
             newNode -> item_no = transaction[i];
             newNode -> nodeLink = NULL;
+            newNode -> parent = x;
 
             (x -> child).push_back(newNode);
             matched_child = newNode;
