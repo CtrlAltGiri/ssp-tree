@@ -12,6 +12,7 @@ void read_record(vector<vector<int>> &res)
 {
 	fstream fin(FILENAME, ios::in);
 	string line;
+	int index = 0;
 
     while(getline(fin, line))
     {

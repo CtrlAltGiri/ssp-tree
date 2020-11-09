@@ -148,11 +148,7 @@ void exchange(node *x, node *y, node *z, int i, int j){
     }
 
     // swap y and z
-
-    // remove z
-    if(!(y -> child).empty())
-        (y -> child).erase((y -> child).begin() + j);
-    vector<node*> tempChildren = y -> child;
+    vector<node*> tempChildren ((y -> child).begin(), (y -> child).end());
     (y -> child).clear();
 
     int k;
