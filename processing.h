@@ -1,21 +1,7 @@
-#include<iostream>
-#include<algorithm>
-#include<climits>
-#include<unordered_set>
-
-struct node{
-    int item_no;
-    unsigned int count;
-    vector<node*> child;
-    node* parent;
-    node* nodeLink;
-};
-
-struct table{
-    int item_no;
-    unsigned int count;
-    node* nodeLink;
-};
+#include <iostream>
+#include <algorithm>
+#include <climits>
+#include <unordered_set>
 
 int indexOfInTable(vector<table> &mainTable, int item_no){
     for(int i = 0; i < mainTable.size(); i++){
@@ -77,7 +63,7 @@ STEP 2: REARRANGE TREE
 */
 
 
-void attachNewNodeLink(int val, node* newLink, vector<table> mainTable, bool replace = false, node* oldLink = NULL){
+void attachNewNodeLink(int val, node* newLink, vector<table> &mainTable, bool replace = false, node* oldLink = NULL){
 
     // First off, find the index
     int index = indexOfInTable(mainTable, val);
