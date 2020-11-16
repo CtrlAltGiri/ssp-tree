@@ -16,7 +16,9 @@ void allCombinations(vector<node*> &arr, int size, int reqLen, int start, int cu
 				tempArr.push_back(arr[i] -> item_no);
 			}
 		}
-		combinations[tempArr] += addCount;
+		if(!tempArr.empty()){
+			combinations[tempArr] += addCount;
+		}
 		return;
 	}
 

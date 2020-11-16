@@ -6,11 +6,11 @@ void TreeConstruction(int n, vector<table> &mainTable, vector<vector<int>> &data
     // Iterate through the dataset.
     for(int i = 0; i < n; i++){
 
-        if(i == 7){
+        /*if(i == 7){
             cout << "Break here";
-        }
+        }*/
 
-        //cout << i << ' ' << flush;
+        // cout << i << ' ' << flush;
 
         // Add to the table and rearrange data[i]
         addCountTable(mainTable, data[i]);
@@ -22,8 +22,9 @@ void TreeConstruction(int n, vector<table> &mainTable, vector<vector<int>> &data
         insertTree(mainTable, data[i], root);
 
         if(i % 100 == 0)
-            cout << i << endl << flush;
+            cout << i << ", "<< flush;
     }
+    cout << "DONE CONSTRUCTION" << endl;
 }
 
 void TreeDeletion(node* root){

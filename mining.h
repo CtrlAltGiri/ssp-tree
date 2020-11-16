@@ -14,12 +14,10 @@ void mineSSPTree(vector<table> &headerTable, node *root, unsigned int freqThresh
     // MINING THE SSP TREE.
     if(root){
 
-        vector<table> secondaryTable;
-        node secondaryRoot = {-1, 0, {}, NULL};
-
         // Iterating through header table
         for(auto i : headerTable){
 
+            cout << "New header table element" << i.item_no << endl;
             // Construction of conditional SSP.
             if(i.count > freqRows){
 
@@ -35,8 +33,9 @@ void mineSSPTree(vector<table> &headerTable, node *root, unsigned int freqThresh
                         tempValues.push_back(tempNode -> parent);
                         tempNode = tempNode -> parent;
                     }
-
-                    allValues.push_back(make_pair(tempValues, currentNode -> count));
+                    if(!tempValues.empty()){
+                        allValues.push_back(make_pair(tempValues, currentNode -> count));
+                    }
                     currentNode = currentNode -> nodeLink;
 
                 }while(currentNode);
@@ -44,7 +43,7 @@ void mineSSPTree(vector<table> &headerTable, node *root, unsigned int freqThresh
                 // Find all combinations
                 map<vector<int>, int> combinations;
                 for(int i = 0; i < allValues.size(); i++){
-                    for(int j = 0; j < allValues[i].first.size(); j++){
+                    for(int j = 1; j <= allValues[i].first.size(); j++){
                         vector<bool> tempBools(allValues[i].first.size(), false);
                         allCombinations(
                             allValues[i].first, allValues[i].first.size(),
