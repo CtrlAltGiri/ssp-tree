@@ -10,7 +10,7 @@ int main(){
     vector<vector<int>> data;
     read_record(data);
 
-    unsigned int n=1000, freqThreshold=2, rareThreshold=1;
+    unsigned int n=1000, freqThreshold=0, rareThreshold=0;
 
     // INPUT TAKEN.
     cout << "Enter the number of rows: ";

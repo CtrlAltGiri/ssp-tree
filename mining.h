@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <vector>
 #include <map>
+#include <algorithm>
 #include "includes/utils.h"
 #include "construction.h"
 
@@ -17,9 +18,12 @@ void mineSSPTree(vector<table> &headerTable, node *root, unsigned int freqThresh
         // Iterating through header table
         for(auto i : headerTable){
 
-            cout << "New header table element" << i.item_no << endl;
+            int currentItemNo = i.item_no;
             // Construction of conditional SSP.
             if(i.count > freqRows){
+
+                // ADD IT TO THE FREQUENT ITEMSETS
+                freqSet[{i.item_no}] = i.count;
 
                 // All paths, each vector has one path.
                 vector<pair<vector<node*>, int>> allValues;
@@ -27,7 +31,10 @@ void mineSSPTree(vector<table> &headerTable, node *root, unsigned int freqThresh
 
                 // Step 1: Get all the things in a vector
                 node* currentNode = i.nodeLink;
+                unsigned int currentItemCount = i.count;
+
                 do{
+                    tempValues.clear();
                     node* tempNode = currentNode;
                     while(tempNode -> parent != root){
                         tempValues.push_back(tempNode -> parent);
@@ -40,7 +47,7 @@ void mineSSPTree(vector<table> &headerTable, node *root, unsigned int freqThresh
 
                 }while(currentNode);
 
-                // Find all combinations
+                // Step 2: Find all combinations
                 map<vector<int>, int> combinations;
                 for(int i = 0; i < allValues.size(); i++){
                     for(int j = 1; j <= allValues[i].first.size(); j++){
@@ -55,13 +62,17 @@ void mineSSPTree(vector<table> &headerTable, node *root, unsigned int freqThresh
                 // For each combination, check frequent.
                 for(auto x : combinations){
                     if(x.second > freqRows){
-                        freqSet[x.first] = x.second;
+
+                        // ADDING THE HEADER TABLE ELEMENT TO THE LIST AS WELL.
+                        vector<int> currentFreqSet;
+                        currentFreqSet.insert(currentFreqSet.end(), x.first.begin(), x.first.end());
+                        currentFreqSet.push_back(currentItemNo);
+                        sort(currentFreqSet.begin(), currentFreqSet.end());
+
+                        // THE COUNT OF THE ITEMSET
+                        freqSet[currentFreqSet] = x.second;
                     }
                 }
-
-                // REMOVE UNWANTED BLOCKS OF MEMORY?
-                vector<table>().swap(secondaryTable);
-                TreeDeletion(&secondaryRoot);
             }
         }
     }

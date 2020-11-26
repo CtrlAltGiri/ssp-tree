@@ -1,6 +1,8 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <unordered_set>
+#include <algorithm>
 #include "structures.h"
 
 void allCombinations(vector<node*> &arr, int size, int reqLen, int start, int currLen, vector<bool> check, map<vector<int>, int> &combinations, unsigned int addCount){
@@ -10,14 +12,17 @@ void allCombinations(vector<node*> &arr, int size, int reqLen, int start, int cu
 	}
 
  	if (currLen == reqLen){
-		vector<int> tempArr;
+		unordered_set<int> tempSet;
 		for(int i = 0; i < size; i++){
 			if(check[i]){
-				tempArr.push_back(arr[i] -> item_no);
+				tempSet.insert(arr[i] -> item_no);
 			}
 		}
-		if(!tempArr.empty()){
-			combinations[tempArr] += addCount;
+		if(!tempSet.empty()){
+
+			vector<int> finalItemSet(tempSet.size());
+			copy(tempSet.begin(), tempSet.end(), finalItemSet.begin());
+			combinations[finalItemSet] += addCount;
 		}
 		return;
 	}
