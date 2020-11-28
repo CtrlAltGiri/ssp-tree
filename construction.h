@@ -3,6 +3,7 @@
 
 void TreeConstruction(int n, vector<table> &mainTable, vector<vector<int>> &data, node *root){
 
+    cout << endl << "TREE CONSTRUCTION IN PROGRESS..." << endl;
     // Iterate through the dataset.
     for(int i = 0; i < n; i++){
 
@@ -24,7 +25,7 @@ void TreeConstruction(int n, vector<table> &mainTable, vector<vector<int>> &data
         if(i % 100 == 0)
             cout << i << ", "<< flush;
     }
-    cout << "DONE CONSTRUCTION" << endl;
+    cout << n << endl << "TREE CONSTRUCTION COMPLETE..." << endl;
 }
 
 void TreeDeletion(node* root){
