@@ -1,30 +1,50 @@
 #include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <sstream>
+#include <vector>
 #include "processing.h"
 
-void TreeConstruction(int n, vector<table> &mainTable, vector<vector<int>> &data, node *root){
+#define FILENAME "./data/data.csv"
+
+void TreeConstruction(int n, vector<table> &mainTable, node *root){
 
     cout << endl << "TREE CONSTRUCTION IN PROGRESS..." << endl;
-    // Iterate through the dataset.
-    for(int i = 0; i < n; i++){
 
-        /*if(i == 7){
-            cout << "Break here";
-        }*/
+    fstream fin(FILENAME, ios::in);
+	string line;
+	int index = 0;
+    vector<int> transaction;
 
-        // cout << i << ' ' << flush;
+    // Iterate through the dataset
+    while(getline(fin, line) && index < n){
+
+        transaction.clear();
+        index++;
+        stringstream ss(line);
+        string temp;
+        char delim = ',';
+        while (std::getline(ss, temp, delim)) {
+            if(!temp.size()){
+                break;
+            }
+            transaction.push_back(stoi(temp));
+        }
 
         // Add to the table and rearrange data[i]
-        addCountTable(mainTable, data[i]);
+        addCountTable(mainTable, transaction);
 
         // Rearrange the tree
-        rearrangeTree(mainTable, data[i], root);
+        rearrangeTree(mainTable, transaction, root);
 
         // Insert into the tree
-        insertTree(mainTable, data[i], root);
+        insertTree(mainTable, transaction, root);
 
-        if(i % 100 == 0)
-            cout << i << ", "<< flush;
+        if(index % 100 == 0)
+            cout << index << ", "<< flush;
     }
+
+
     cout << n << endl << "TREE CONSTRUCTION COMPLETE..." << endl;
 }
 

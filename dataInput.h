@@ -1,5 +1,4 @@
 #include <fstream>
-#include <fstream>
 #include <cstdlib>
 #include <sstream>
 #include <vector>
@@ -8,7 +7,7 @@
 
 using namespace std;
 
-void read_record(vector<vector<int>> &res)
+void read_all_records(vector<vector<int>> &res)
 {
 	fstream fin(FILENAME, ios::in);
 	string line;

@@ -7,10 +7,6 @@ using namespace std;
 
 int main(){
 
-    // Read data
-    vector<vector<int>> data;
-    read_record(data);
-
     unsigned int n=1000, freqThreshold=0, rareThreshold=0;
 
     // INPUT TAKEN.
@@ -30,7 +26,7 @@ int main(){
 
     // Tree construction
     clock_t startConstruction = clock(), endConstruction;
-    TreeConstruction(n, mainTable, data, &root);
+    TreeConstruction(n, mainTable, &root);
     endConstruction = clock();
     double constructionTime = ((double) (endConstruction - startConstruction)) / CLOCKS_PER_SEC;
 
