@@ -7,7 +7,7 @@ using namespace std;
 
 int main(){
 
-    unsigned int n=1000, freqThreshold=0, rareThreshold=0;
+    unsigned int n = 0, freqThreshold = 0, rareThreshold = 0;
 
     // INPUT TAKEN.
     cout << "Enter the number of rows: ";

@@ -126,7 +126,6 @@ void mineSSPTree(vector<table> &headerTable, node *root, unsigned int freqThresh
     cout << "Total Memory Usage: " << sspTreeMemUsage + headerTableMemUsage << endl << endl;
 
     cout << "Frequent and Rare itemsets are stored in output folder" << endl << endl;
-    // MAYBE DELETE ROOT AND ALL HERE?
 }
 
 unsigned int memUsageCheck(node* root){

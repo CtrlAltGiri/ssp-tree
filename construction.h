@@ -3,7 +3,8 @@
 #include <cstdlib>
 #include <sstream>
 #include <vector>
-#include "processing.h"
+#include "constructHeaderTable.h"
+#include "constructTree.h"
 
 #define FILENAME "./data/data.csv"
 
@@ -31,7 +32,7 @@ void TreeConstruction(int n, vector<table> &mainTable, node *root){
             transaction.push_back(stoi(temp));
         }
 
-        // Add to the table and rearrange data[i]
+        // Add to the table and rearrange transaction
         addCountTable(mainTable, transaction);
 
         // Rearrange the tree

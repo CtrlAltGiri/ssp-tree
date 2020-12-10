@@ -3,12 +3,11 @@
 #include <sstream>
 #include <vector>
 
-#define FILENAME "./data/data.csv"
-
 using namespace std;
 
 void read_all_records(vector<vector<int>> &res)
 {
+	string FILENAME = "./data/data.csv";
 	fstream fin(FILENAME, ios::in);
 	string line;
 	int index = 0;
