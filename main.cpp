@@ -33,6 +33,7 @@ int main(){
     // Tree Mining
     mineSSPTree(mainTable, &root, freqThreshold, rareThreshold, n, constructionTime);
 
+    /*
     char changedFile = 'Y';
     while(changedFile == 'Y' || changedFile == 'y'){
         cout << "Initial Tree Construction and Mining Complete." << endl << "Enter Y if you have modified file and you wish to repeat process: ";
@@ -42,4 +43,5 @@ int main(){
             cout << "Done bruv." << endl;
         }
     }
+    */
 }
