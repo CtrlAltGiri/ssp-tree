@@ -30,5 +30,16 @@ int main(){
     endConstruction = clock();
     double constructionTime = ((double) (endConstruction - startConstruction)) / CLOCKS_PER_SEC;
 
+    // Tree Mining
     mineSSPTree(mainTable, &root, freqThreshold, rareThreshold, n, constructionTime);
+
+    char changedFile = 'Y';
+    while(changedFile == 'Y' || changedFile == 'y'){
+        cout << "Initial Tree Construction and Mining Complete." << endl << "Enter Y if you have modified file and you wish to repeat process: ";
+        cin >> changedFile;
+
+        if(changedFile == 'Y' || changedFile == 'y'){
+            cout << "Done bruv." << endl;
+        }
+    }
 }

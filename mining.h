@@ -24,10 +24,14 @@ void mineSSPTree(vector<table> &headerTable, node *root, unsigned int freqThresh
 
             int currentItemNo = i.item_no;
             // Construction of conditional SSP.
-            if(i.count > freqRows){
+            if(i.count > rareRows){
 
                 // ADD IT TO THE FREQUENT ITEMSETS
-                freqSet[{i.item_no}] = i.count;
+                rareSet[{i.item_no}] = i.count;
+
+		if(i.count > freqRows){
+			freqSet[{i.item_no}] = i.count;
+		}
 
                 // All paths, each vector has one path.
                 vector<pair<vector<node*>, int>> allValues;
